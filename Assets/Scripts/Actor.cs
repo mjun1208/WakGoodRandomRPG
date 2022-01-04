@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Timers;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
 
 public class Actor : MonoBehaviour
 {
