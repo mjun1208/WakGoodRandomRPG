@@ -74,6 +74,15 @@ namespace WRR
             float mouse_y = Input.GetAxis("Mouse Y");
 
             CameraRotationEuler += new Vector3(-mouse_y * 0.2f, mouse_x, 0);
+
+            CameraRotationEuler = CameraRotationClamp(CameraRotationEuler);
+        }
+
+        private Vector3 CameraRotationClamp(Vector3 rotation)
+        {
+            rotation.x = Mathf.Clamp(CameraRotationEuler.x, -80f, 60f);
+            
+            return rotation;
         }
 
         private void Move()
