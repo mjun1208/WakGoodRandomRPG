@@ -13,6 +13,8 @@ namespace WRR
 
         public Vector3 CameraRotationEuler { get; private set; } = Vector3.zero;
         
+        private bool _isMouseControll = true;
+        
         private bool _isMoveInput = false;
         private bool _isRunInput = false;
         private bool _isAttackInput = false;
@@ -20,8 +22,19 @@ namespace WRR
         private Vector3 _dir;
         
         void Update()
-        {            
-            CameraRotation();
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _isMouseControll = !_isMouseControll;
+                
+                LockMouse(_isMouseControll);
+            }
+
+            if (_isMouseControll)
+            {
+                CameraRotation();
+            }
+
             KeyInput();
             Move();
             Attack();
@@ -31,8 +44,21 @@ namespace WRR
         {
             if (hasFocus)
             {
+                LockMouse(_isMouseControll);
+            }
+        }
+
+        private void LockMouse(bool isLock)
+        {
+            if (isLock)
+            {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
 
