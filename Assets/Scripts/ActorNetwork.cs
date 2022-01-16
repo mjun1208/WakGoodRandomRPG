@@ -7,7 +7,7 @@ namespace WRR.Server
 {
     public class ActorNetwork : MonoBehaviour
     {
-        Session _session;
+        private Session _session;
 
         bool _isConnected = true;
         bool _callOnce = true;
