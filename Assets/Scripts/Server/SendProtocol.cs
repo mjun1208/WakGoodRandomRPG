@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WRR.Server
 {
-    class SendProtocol
+    public class SendProtocol
     {
         public static bool SendPacketReqLogin(Session session, Int64 AccountNo, string id, string nickname, string SessionKey)
         {
