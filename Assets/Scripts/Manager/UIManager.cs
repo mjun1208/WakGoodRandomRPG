@@ -7,6 +7,9 @@ namespace WRR
 {
     public class UIManager : MonoBehaviour
     {
+        public UIChattingWindow UIChattingWindow => _uiChattingWindow;
+
+        [SerializeField] private UIChattingWindow _uiChattingWindow;
 
         private void Awake()
         {
