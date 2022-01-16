@@ -15,6 +15,7 @@ namespace WRR
         
         private bool _isMoveInput = false;
         private bool _isRunInput = false;
+        private bool _isAttackInput = false;
         private Vector3 _inputDir;
         private Vector3 _dir;
         
@@ -23,6 +24,7 @@ namespace WRR
             CameraRotation();
             KeyInput();
             Move();
+            Attack();
         }
 
         private void OnApplicationFocus(bool hasFocus)
@@ -66,6 +68,15 @@ namespace WRR
             {
                 _isRunInput = false;
             }
+
+            if (Input.GetMouseButton(0))
+            {
+                _isAttackInput = true;
+            }
+            else
+            {
+                _isAttackInput = false;
+            }
         }
         
         private void CameraRotation()
@@ -104,6 +115,11 @@ namespace WRR
 
             this.transform.Translate(Vector3.forward * Time.deltaTime * (_isRunInput ? 10f : 5f));
             this.transform.DOLookAt(this.transform.position + _dir, 0.1f);
+        }
+
+        private void Attack()
+        {
+            _animator.SetBool("IsAttack", _isAttackInput);
         }
     }
 }
