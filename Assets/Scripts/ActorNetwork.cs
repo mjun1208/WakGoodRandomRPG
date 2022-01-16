@@ -101,9 +101,6 @@ namespace WRR.Server
                         RecvProtocol.RecvPacketResMove(outPacket, out accountNo, out sectorX, out sectorY);
 
                         Debug.Log($" 캐릭터 섹터 위치 : " + sectorX + ", " + sectorY);
-
-                        // 메시지 테스트
-                        SendProtocol.SendPacketReqMessage(_session, accountNo, 16, "호두과자 맛있어호두과자 맛있어");
                     }
                         break;
                     case ProtocolType.en_PACKET_CS_CHAT_RES_MESSAGE:
@@ -115,9 +112,6 @@ namespace WRR.Server
                         RecvProtocol.RecvPacketResMessage(outPacket, out accountNo, out id, out nickname, out message);
 
                         // 읽은 다음에 할 행동
-                        Debug.Log($"채팅 메시지 : " + message);
-
-                        SendProtocol.SendPacketReqMessage(_session, accountNo, 16, "호두과자 맛있어호두과자 맛있어");
                         ActorCallBackEvent.ChatCallBackEvent?.Invoke(nickname, message);
                         //
                     }

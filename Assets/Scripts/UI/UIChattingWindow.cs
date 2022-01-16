@@ -51,6 +51,8 @@ public class UIChattingWindow : MonoBehaviour
     {
         _inputField.Select();
         _inputField.text = "";
+        
+        SendProtocol.SendPacketReqMessage(Global.MyActor.ActorNetwork.GetSession(), Global.MyActor.ActorNetwork.GetSession()._uniqueID, (short)msg.Length, msg);
     }
 
     private void Receive(string nickName, string message)

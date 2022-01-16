@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Timers;
 using DG.Tweening;
 using UnityEngine;
+using WRR.Server;
 
 namespace WRR
 {
     public class Actor : MonoBehaviour
     {
-        [SerializeField] private Animator _animator;
-
+        public ActorNetwork ActorNetwork => _network;
         public Vector3 CameraRotationEuler { get; private set; } = Vector3.zero;
+
+        [SerializeField] private ActorNetwork _network;
+        [SerializeField] private Animator _animator;
         
         private bool _isMouseControll = true;
         
