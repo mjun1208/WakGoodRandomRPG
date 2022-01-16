@@ -31,5 +31,15 @@ namespace WRR
         {
             _instance = this;
         }
+
+        public void SetMyActor(Actor actor)
+        {
+            MyActor = actor;
+        }
+        
+        public void SetUIManager(UIManager uiManager)
+        {
+            _uiManager = uiManager;
+        }
     }
 }

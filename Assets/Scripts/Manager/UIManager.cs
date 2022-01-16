@@ -7,5 +7,10 @@ namespace WRR
 {
     public class UIManager : MonoBehaviour
     {
+
+        private void Awake()
+        {
+            Global.Instance.SetUIManager(this);
+        }
     }
 }

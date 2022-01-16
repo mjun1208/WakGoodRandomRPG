@@ -20,7 +20,12 @@ namespace WRR
         private bool _isAttackInput = false;
         private Vector3 _inputDir;
         private Vector3 _dir;
-        
+
+        private void Awake()
+        {
+            Global.Instance.SetMyActor(this);
+        }
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
