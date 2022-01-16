@@ -311,7 +311,7 @@ public class Packet : IDisposable
         try
         {            
             var _encoding = Encoding.Convert(Encoding.Unicode, Encoding.UTF8, readableBuffer, readPos, _length); // Convert the bytes to a string
-            var _value = Encoding.UTF8.GetString(_encoding);
+            var _value = Encoding.UTF8.GetString(_encoding).Trim('\0');
             if (_value.Length > 0)
             {
                 // If _moveReadPos is true string is not empty
