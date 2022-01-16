@@ -16,6 +16,8 @@ public class UIChattingWindow : MonoBehaviour
 
     private void Start()
     {
+        ActorCallBackEvent.ChatCallBackEvent += Receive;
+        
         _inputField.onEndEdit.AddListener(Send);
     }
 

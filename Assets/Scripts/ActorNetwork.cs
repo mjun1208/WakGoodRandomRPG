@@ -118,6 +118,7 @@ namespace WRR.Server
                         Debug.Log($"채팅 메시지 : " + message);
 
                         SendProtocol.SendPacketReqMessage(_session, accountNo, 16, "호두과자 맛있어호두과자 맛있어");
+                        ActorCallBackEvent.ChatCallBackEvent?.Invoke(nickname, message);
                         //
                     }
                         break;
