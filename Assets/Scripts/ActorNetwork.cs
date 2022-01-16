@@ -17,7 +17,6 @@ namespace WRR.Server
             if (Init() == false)
             {
                 _isConnected = false;
-                return;
             }
         }
 
