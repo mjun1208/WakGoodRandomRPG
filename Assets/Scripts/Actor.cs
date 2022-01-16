@@ -87,7 +87,7 @@ namespace WRR
 
         private void Move()
         {
-            _animator.SetBool("isMove", _inputDir != Vector3.zero);
+            _animator.SetBool("IsMove", _inputDir != Vector3.zero);
             _animator.SetFloat("MoveSpeed", _isRunInput ? 1f : 0f);
             
             if (_inputDir == Vector3.zero)
