@@ -15,6 +15,8 @@ namespace WRR
 
         [SerializeField] private ActorNetwork _network;
         [SerializeField] private Animator _animator;
+        [SerializeField] private GameObject _actorCameraTarget;
+        
         
         private bool _isMouseControll = true;
         
@@ -29,7 +31,7 @@ namespace WRR
             Global.Instance.SetMyActor(this);
         }
 
-        void Update()
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -38,16 +40,19 @@ namespace WRR
                 LockMouse(_isMouseControll);
             }
 
-            if (_isMouseControll)
-            {
-                CameraRotation();
-            }
-
             KeyInput();
             Move();
             Attack();
         }
 
+        private void LateUpdate()
+        {
+            if (_isMouseControll)
+            {
+                CameraRotation();
+            }
+        }
+        
         private void OnApplicationFocus(bool hasFocus)
         {
             if (hasFocus)
@@ -121,10 +126,14 @@ namespace WRR
             CameraRotationEuler += new Vector3(-mouse_y * 0.2f, mouse_x, 0);
 
             CameraRotationEuler = CameraRotationClamp(CameraRotationEuler);
+            
+            // Cinemachine will follow this target
+            _actorCameraTarget.transform.rotation = Quaternion.Euler(CameraRotationEuler.x, CameraRotationEuler.y, 0.0f);
         }
 
         private Vector3 CameraRotationClamp(Vector3 rotation)
         {
+            rotation.y = Mathf.Clamp(rotation.y, float.MinValue, float.MaxValue);
             rotation.x = Mathf.Clamp(CameraRotationEuler.x, -80f, 60f);
             
             return rotation;
@@ -147,8 +156,11 @@ namespace WRR
 
             _dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
+            float rotationVelocity = 0f;
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref rotationVelocity, 0f);
+            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            
             this.transform.Translate(Vector3.forward * Time.deltaTime * (_isRunInput ? 10f : 5f));
-            this.transform.DOLookAt(this.transform.position + _dir, 0.1f);
         }
 
         private void Attack()
