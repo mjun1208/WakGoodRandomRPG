@@ -106,6 +106,11 @@ public class Packet : IDisposable
         buffer.AddRange(BitConverter.GetBytes(_value));
     }
 
+    public void Write(double _value)
+    {
+        buffer.AddRange(BitConverter.GetBytes(_value));
+    }
+
     public void Write(bool _value)
     {
         buffer.AddRange(BitConverter.GetBytes(_value));
@@ -268,7 +273,24 @@ public class Packet : IDisposable
             throw new Exception("Could not read value of type 'float'!");
         }
     }
-
+    public double ReadDouble(bool _moveReadPos = true)
+    {
+        if (buffer.Count > readPos)
+        {
+            // If there are unread bytes
+            double _value = BitConverter.ToDouble(readableBuffer, readPos); // Convert the bytes to a float
+            if (_moveReadPos)
+            {
+                // If _moveReadPos is true
+                readPos += 8; // Increase readPos by 4
+            }
+            return _value; // Return the float
+        }
+        else
+        {
+            throw new Exception("Could not read value of type 'float'!");
+        }
+    }
     public bool ReadBool(bool _moveReadPos = true)
     {
         if (buffer.Count > readPos)
