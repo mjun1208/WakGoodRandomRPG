@@ -26,9 +26,25 @@ namespace WRR
         private Vector3 _inputDir;
         private Vector3 _dir;
 
+        private int _frame = 0;
+
         private void Awake()
         {
             Global.Instance.SetMyActor(this);
+        }
+
+        private void FixedUpdate()
+        {
+            _frame++;
+            
+            if (_frame > 5)
+            {
+                SendProtocol.SendPacketGameReqLocationInfo(_network.GetSession(), _network.GetSession()._uniqueID,
+                    this.transform.position.x, this.transform.position.y, this.transform.position.z,
+                    this.transform.eulerAngles.y);
+
+                _frame = 0;
+            }
         }
 
         private void Update()

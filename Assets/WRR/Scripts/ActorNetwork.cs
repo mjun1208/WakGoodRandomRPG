@@ -156,7 +156,6 @@ namespace WRR.Server
 
                             // 보내고 싶은 경우 - 아래 방식으로 보내면 되고 return 값 꼭 확인해서 실패하는 지 확인 바람. 항상.
                             // 이동할때 보내면 됨. 하지만 너무 빈번하게 보내지 않았으면 좋겠음.
-                            SendProtocol.SendPacketGameReqLocationInfo(_session, accountNo, posX, posY, posZ, rotY);
                         }
                         break;
                 }
