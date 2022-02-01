@@ -21,15 +21,20 @@ namespace WRR
         }
         
         public static UIManager UIManager => _uiManager;
+        public static ActorManager ActorManager => _actorManager;
         
         private static Global _instance;
         private static UIManager _uiManager;
+        private static ActorManager _actorManager;
 
         public static Actor MyActor { get; private set; }
 
         private void Awake()
         {
             _instance = this;
+            
+            _actorManager = new ActorManager();
+            _actorManager.Initialize();
         }
 
         public void SetMyActor(Actor actor)
