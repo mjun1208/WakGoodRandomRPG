@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DummyActor : MonoBehaviour
 {
+    private Vector3 targetPosition;
+    
+    public void Update()
+    {
+        this.transform.position = Vector3.Lerp(this.transform.position, targetPosition,5f * Time.deltaTime);
+    }
+
     public void SetPosition(Vector3 position, float rotation)
     {
-        this.transform.position = position;
+        targetPosition = position;
         
         float rotationVelocity = 0f;
         rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, rotation, ref rotationVelocity, 0f);
