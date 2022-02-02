@@ -10,6 +10,8 @@ public class ActorManager
     public void Initialize()
     {
         ActorCallBackEvent.LocationCallBackEvent += SetActorLocation;
+
+        DummyActors = new Dictionary<int, DummyActor>();
     }
 
     public void SetActorLocation(int accountID, Vector3 position, float rotation)
