@@ -12,6 +12,8 @@ namespace WRR.Server
         bool _isConnected = true;
         bool _callOnce = true;
 
+        public bool IsSectorSetting { get; set; } = false;
+
         void Start()
         {
             if (Init() == false)
@@ -144,6 +146,7 @@ namespace WRR.Server
                             short sectorY;
                             RecvProtocol.RecvPacketGameResSectorMove(outPacket, out accountNo, out sectorX, out sectorY);
 
+                            IsSectorSetting = true;
                             Debug.Log($" 캐릭터 섹터 위치 : " + sectorX + ", " + sectorY);
                         }
                         break;
