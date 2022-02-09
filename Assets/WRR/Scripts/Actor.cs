@@ -35,6 +35,11 @@ namespace WRR
 
         private void FixedUpdate()
         {
+            if (!_network.IsSectorSetting)
+            {
+                return;
+            }
+            
             _frame++;
             
             if (_frame > 5)
