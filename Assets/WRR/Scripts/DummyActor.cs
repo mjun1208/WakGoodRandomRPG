@@ -2,6 +2,7 @@
 
 public class DummyActor : MonoBehaviour
 {
+    [SerializeField] private Animator _animator;
     private Vector3 targetPosition;
     private float _lastRotation;
 
@@ -10,6 +11,7 @@ public class DummyActor : MonoBehaviour
         float distance = Vector3.Distance(targetPosition, this.transform.position);
         if (distance > 0.05f)
         {
+            _animator.SetBool("IsMove", true);
             this.transform.position = Vector3.MoveTowards(this.transform.position, targetPosition, 5f * Time.deltaTime);
 
             var dir = targetPosition - this.transform.position;
@@ -19,6 +21,7 @@ public class DummyActor : MonoBehaviour
         }
         else
         {
+            _animator.SetBool("IsMove", false);
             this.transform.position = targetPosition;
             this.transform.rotation = Quaternion.Slerp( this.transform.rotation, Quaternion.Euler(0.0f, _lastRotation, 0.0f), 15f * Time.deltaTime);
         }
