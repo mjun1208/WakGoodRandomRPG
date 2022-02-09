@@ -16,6 +16,11 @@ public class ActorManager
 
     public void SetActorLocation(int accountID, Vector3 position, float rotation)
     {
+        if (accountID == Global.MyActor.ActorNetwork.GetSession()._uniqueID)
+        {
+            return;
+        }
+        
         if (DummyActors.ContainsKey(accountID))
         {
             DummyActors[accountID].SetPosition(position, rotation);
